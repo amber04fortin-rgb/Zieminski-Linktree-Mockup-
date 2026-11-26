@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zieminski Real Estate Brokerage | Bio Link Mockup</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for clean icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            zreDark: '#191124',
+            zreCard: '#231833',
+            zreCardHover: '#2D1F42',
+            zrePink: '#E61E64',
+            zrePinkHover: '#FF2A75',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0F0A17;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Northern Ontario pine & twilight gradient overlay */
+    .header-backdrop {
+      background: 
+        linear-gradient(180deg, rgba(25, 17, 36, 0.35) 0%, rgba(230, 30, 100, 0.22) 55%, rgba(25, 17, 36, 1) 100%),
+        radial-gradient(circle at 50% 20%, rgba(230, 30, 100, 0.28), transparent 70%);
+    }
+
+    /* Subtle pulse glow for Hero CTA */
+    @keyframes softPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(230, 30, 100, 0.55);
+      }
+      50% {
+        box-shadow: 0 0 22px 4px rgba(230, 30, 100, 0.35);
+      }
+    }
+
+    .hero-cta-glow {
+      animation: softPulse 3.2s infinite ease-in-out;
+    }
+
+    /* Custom subtle scrollbar inside phone preview */
+    .phone-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .phone-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .phone-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+
+    /* Hide scrollbar for clean horizontal carousel swipe */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start py-4 sm:py-8 px-3 sm:px-6">
+
+  <!-- Top Controls Bar (Outside Phone Frame for Strategy Comparison) -->
+  <div class="w-full max-w-md mb-4 bg-[#1E152B] border border-white/10 rounded-2xl p-3.5 shadow-xl">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <span class="text-xs font-semibold uppercase tracking-wider text-pink-400 flex items-center gap-1.5">
+        <i class="fa-solid fa-sliders"></i> Layout Strategy Preview
+      </span>
+      <span class="text-[11px] text-gray-400">Step #7 Flow Toggle</span>
+    </div>
+    <div class="grid grid-cols-2 gap-1.5 bg-[#130D1C] p-1 rounded-xl">
+      <button
+        id="btn-order-listings"
+        onclick="setSection7Order('listings-first')"
+        class="py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 bg-zrePink text-white shadow-sm cursor-pointer"
+      >
+        1. Listings → 2. Blog Series
+      </button>
+      <button
+        id="btn-order-series"
+        onclick="setSection7Order('series-first')"
+        class="py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 text-gray-300 hover:text-white cursor-pointer"
+      >
+        1. Blog Series → 2. Listings
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Device Frame -->
+  <main class="w-full max-w-[420px] bg-zreDark rounded-[2.5rem] sm:border-[6px] sm:border-[#2C203D] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.85)] overflow-hidden relative flex flex-col">
+    
+    <!-- Decorative Atmospheric Header Banner (Mirrors zieminski.ca lake & pine banner) -->
+    <div class="relative w-full h-36 overflow-hidden">
+      <!-- Stylized Pine & Lake SVG Landscape Illustration -->
+      <svg class="absolute inset-0 w-full h-full object-cover" viewBox="0 0 420 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1E142D" />
+            <stop offset="55%" stop-color="#3B1A3A" />
+            <stop offset="100%" stop-color="#6E1942" />
+          </linearGradient>
+        </defs>
+        <rect width="420" height="160" fill="url(#skyGrad)" />
+        <!-- Distant Shoreline -->
+        <path d="M0 105 Q110 92 220 104 T420 98 L420 160 L0 160 Z" fill="#171022" opacity="0.85" />
+        <!-- Northern Pine Silhouettes Left -->
+        <polygon points="35,32 16,105 54,105" fill="#120B1B" />
+        <polygon points="35,50 12,115 58,115" fill="#120B1B" />
+        <polygon points="72,48 56,108 88,108" fill="#160E21" />
+        <!-- Northern Pine Silhouettes Right -->
+        <polygon points="355,28 334,106 376,106" fill="#120B1B" />
+        <polygon points="388,45 370,110 406,110" fill="#160E21" />
+        <polygon points="322,58 308,108 336,108" fill="#191124" />
+        <!-- Subtle Lake Reflection -->
+        <rect x="0" y="108" width="420" height="52" fill="#191124" opacity="0.7" />
+        <ellipse cx="210" cy="122" rx="130" ry="6" fill="#E61E64" opacity="0.18" />
+      </svg>
+      <div class="absolute inset-0 header-backdrop"></div>
+
+      <!-- Subtle Share Button Top Right -->
+      <button
+        onclick="copyProfileLink()"
+        title="Copy Bio Link"
+        class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/35 hover:bg-black/55 backdrop-blur-md border border-white/15 flex items-center justify-center text-white/90 transition cursor-pointer"
+      >
+        <i class="fa-solid fa-arrow-up-from-bracket text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Main Scrollable Bio Content -->
+    <div class="px-5 pb-8 -mt-14 relative z-10 flex flex-col items-center text-center phone-scroll">
+
+      <!-- 1. TEAM PHOTO OR LOGO AVATAR -->
+      <div class="relative group mb-3.5">
+        <div class="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-zrePink via-pink-400 to-white/80 shadow-xl">
+          <div class="w-full h-full rounded-full bg-zrePink flex items-center justify-center relative overflow-hidden">
+            <!-- Exact Stylized 'Z' Emblem from Zieminski Real Estate Screenshot -->
+            <svg class="w-12 h-12 text-white drop-shadow-sm" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 18H44L24 34H46L20 48" stroke="white" stroke-width="7.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            </svg>
+          </div>
+        </div>
+        <!-- Optional Team Photo Swap Pill -->
+        <button
+          onclick="openPreviewModal('1. Profile Avatar / Team Photo', 'Display your warm team headshot here or keep the signature circular Zieminski Z emblem for instant brand recognition.', 'zieminski.ca/meet-the-team')"
+          class="absolute -bottom-1 -right-1 bg-[#261A36] hover:bg-zrePink text-white text-[10px] font-semibold px-2 py-0.5 rounded-full border border-white/20 shadow transition cursor-pointer"
+          title="Tip: Swap between Team Photo & Logo"
+        >
+          <i class="fa-solid fa-camera mr-0.5"></i> Team
+        </button>
+      </div>
+
+      <!-- 2. BRAND NAME -->
+      <h1 class="font-display font-extrabold text-xl tracking-tight text-white flex items-center justify-center gap-1.5">
+        Zieminski Real Estate Brokerage
+        <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-zrePink text-[9px] text-white" title="Verified Brokerage">
+          <i class="fa-solid fa-check"></i>
+        </span>
+      </h1>
+      <p class="text-xs font-medium text-pink-300/90 tracking-wide uppercase mt-0.5">
+        Northern Ontario
+      </p>
+
+      <!-- 3. BIO -->
+      <p class="text-[13.5px] leading-relaxed text-gray-200/95 max-w-[335px] mt-2.5">
+        Helping families buy &amp; sell across Northern Ontario 🌲🏡 Stress-friendly moves, local market insight &amp; honest guidance.
+      </p>
+
+      <!-- 4. SOCIAL ICONS -->
+      <div class="flex items-center justify-center gap-3 mt-4 mb-5">
+        <button
+          onclick="openPreviewModal('4. Facebook Page', 'Connects directly to Zieminski Real Estate Brokerage on Facebook for local community updates & new listings.', 'facebook.com/zieminskirealestate')"
+          aria-label="Facebook"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 hover:border-zrePink flex items-center justify-center text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <i class="fa-brands fa-facebook-f text-base"></i>
+        </button>
+        <button
+          onclick="openPreviewModal('4. Instagram Profile', 'Connects to Instagram Reels, home tours, and behind-the-scenes clips.', 'instagram.com/zieminskirealestate')"
+          aria-label="Instagram"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 hover:border-zrePink flex items-center justify-center text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <i class="fa-brands fa-instagram text-lg"></i>
+        </button>
+        <button
+          onclick="openPreviewModal('4. YouTube Channel', 'Connects to full property walkthroughs and educational real estate videos.', 'youtube.com/@zieminskirealestate')"
+          aria-label="YouTube"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 hover:border-zrePink flex items-center justify-center text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <i class="fa-brands fa-youtube text-base"></i>
+        </button>
+        <button
+          onclick="openPreviewModal('4. Direct Email', 'Opens a direct email message to the Zieminski Real Estate team.', 'info@zieminski.ca')"
+          aria-label="Email"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 hover:border-zrePink flex items-center justify-center text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <i class="fa-regular fa-envelope text-base"></i>
+        </button>
+        <button
+          onclick="openPreviewModal('4. Call or Text Office', 'Initiates a direct phone call or text message with our Northern Ontario brokerage.', 'zieminski.ca/contact')"
+          aria-label="Phone"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 hover:border-zrePink flex items-center justify-center text-white transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+        >
+          <i class="fa-solid fa-phone text-sm"></i>
+        </button>
+      </div>
+
+      <!-- FEATURED TEAM / CAMPAIGN IMAGE SLOT (Between Social Icons & Hero CTA) -->
+      <div class="w-full mb-4">
+        <button
+          onclick="openPreviewModal('Featured Team & Seasonal Banner Slot', 'Ideal space for a warm team group photo, seasonal campaign graphic, or open-house spotlight right above your primary call-to-action.', 'zieminski.ca/meet-the-team')"
+          class="w-full group relative rounded-2xl overflow-hidden border border-pink-500/35 hover:border-zrePink bg-zreCard shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 block text-left cursor-pointer"
+        >
+          <div class="aspect-[16/9] w-full relative overflow-hidden bg-gradient-to-br from-[#2B183D] via-[#46183A] to-[#191124]">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+              alt="Zieminski Real Estate Brokerage Team & Northern Ontario Homes"
+              onerror="this.onerror=null; this.src='https://placehold.co/800x450/231833/F472B6?text=Zieminski+Team+Photo+%2F+Feature+Banner';"
+              class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-500"
+            />
+            <!-- Brand Tint & Legibility Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#191124] via-[#191124]/35 to-transparent"></div>
+
+            <!-- Top-Right Slot Indicator Pill -->
+            <span class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/15 text-[10px] font-semibold text-pink-200 flex items-center gap-1">
+              <i class="fa-regular fa-image text-zrePink"></i> Team / Feature Photo
+            </span>
+
+            <!-- Bottom Caption Bar -->
+            <div class="absolute bottom-2.5 left-3 right-3 flex items-end justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-pink-300 block">
+                  Local Expertise • Personal Care
+                </span>
+                <span class="font-display font-bold text-sm text-white leading-tight block">
+                  Your Northern Ontario Real Estate Team
+                </span>
+              </div>
+              <span class="w-7 h-7 rounded-full bg-zrePink/90 group-hover:bg-zrePink text-white flex items-center justify-center shrink-0 shadow transition">
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- LINKS STACK (Steps 5 through 10) -->
+      <div class="w-full space-y-3 text-left">
+
+        <!-- 5. HERO CTA: GET IN TOUCH / BOOK A CONSULT -->
+        <button
+          onclick="openPreviewModal('5. Hero Conversion CTA', 'Frames outreach as a warm, low-pressure conversation rather than a generic contact form. Ideal for Calendly or quick-consult booking.', 'zieminski.ca/contact')"
+          class="w-full group relative rounded-2xl bg-zrePink hover:bg-zrePinkHover p-4 transition-all duration-200 transform hover:-translate-y-0.5 hero-cta-glow flex items-center justify-between cursor-pointer"
+        >
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0">
+              <i class="fa-regular fa-calendar-check text-lg"></i>
+            </div>
+            <div>
+              <div class="font-display font-bold text-[15px] text-white leading-snug">
+                Let’s Chat About Your Move
+              </div>
+              <div class="text-xs text-white/90 font-medium mt-0.5">
+                Book a consult or schedule a quick call
+              </div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-white/80 group-hover:translate-x-1 transition-transform text-xs"></i>
+        </button>
+
+        <!-- 6. WHAT'S MY HOME WORTH? (HOME COST COMPARISON CALCULATOR) -->
+        <button
+          onclick="openPreviewModal('6. Seller Lead Magnet & Calculator', 'Captures high-intent homeowner leads by linking directly to your Home Cost Comparison Calculator & Home Evaluation tool.', 'zieminski.ca/home-value-calculator')"
+          class="w-full group rounded-2xl bg-zreCard hover:bg-zreCardHover border border-pink-500/35 hover:border-zrePink p-3.5 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-between cursor-pointer"
+        >
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-zrePink/15 border border-zrePink/30 flex items-center justify-center text-zrePink shrink-0">
+              <i class="fa-solid fa-calculator text-base"></i>
+            </div>
+            <div>
+              <div class="font-display font-bold text-[14.5px] text-white leading-snug">
+                What’s My Home Worth?
+              </div>
+              <div class="text-xs text-gray-300 mt-0.5">
+                Try our home cost comparison calculator
+              </div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all text-xs"></i>
+        </button>
+
+        <!-- 7. DYNAMIC SECTION: FEATURED LISTINGS CAROUSEL & "WHAT IS YOUR HOME TRYING TO TELL YOU?" SERIES -->
+        <div id="section-7-container" class="space-y-3">
+          
+          <!-- 7A: Featured Listings Interactive Carousel -->
+          <div
+            id="card-featured-listings"
+            class="w-full rounded-2xl bg-zreCard border border-white/10 p-3.5 transition-all duration-200"
+          >
+            <!-- Carousel Header Bar -->
+            <div class="flex items-center justify-between mb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-zrePink/20 text-zrePink flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-house-chimney"></i>
+                </span>
+                <span class="font-display font-bold text-[14px] text-white">Featured Listings</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button
+                  onclick="scrollListingsCarousel(-1)"
+                  aria-label="Previous listing"
+                  class="w-7 h-7 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 flex items-center justify-center text-gray-200 hover:text-white transition cursor-pointer"
+                >
+                  <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </button>
+                <button
+                  onclick="scrollListingsCarousel(1)"
+                  aria-label="Next listing"
+                  class="w-7 h-7 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 flex items-center justify-center text-gray-200 hover:text-white transition cursor-pointer"
+                >
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Horizontal Swipeable / Scrollable Track -->
+            <div
+              id="listings-carousel"
+              onscroll="updateCarouselDots()"
+              class="flex gap-2.5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-1"
+            >
+              <!-- Listing Card 1 -->
+              <button
+                onclick="openPreviewModal('7a. 412 Pineview Crescent • $389,000', '3 Beds • 2 Baths • Detached family home in Iroquois Falls with updated kitchen, heated garage & wooded backyard.', 'zieminski.ca/listings/412-pineview-cres')"
+                class="snap-start shrink-0 w-[235px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink overflow-hidden text-left group transition-all duration-200 cursor-pointer"
+              >
+                <div class="h-24 w-full relative overflow-hidden bg-gradient-to-br from-[#3B1A3A] via-[#261838] to-[#191124]">
+                  <svg class="w-full h-full opacity-85" viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice">
+                    <polygon points="28,18 14,72 42,72" fill="#120B1B" />
+                    <polygon points="52,26 40,74 64,74" fill="#160E21" />
+                    <polygon points="205,20 190,72 220,72" fill="#120B1B" />
+                    <path d="M88 64 L120 40 L152 64 L152 84 L88 84 Z" fill="#E61E64" opacity="0.28" />
+                    <path d="M84 64 L120 37 L156 64" stroke="#F472B6" stroke-width="2.5" fill="none" />
+                    <rect x="113" y="67" width="14" height="17" fill="#191124" />
+                  </svg>
+                  <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-zrePink text-white font-display font-bold text-xs shadow">
+                    $389,000
+                  </span>
+                  <span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/55 backdrop-blur-sm text-[10px] font-semibold text-pink-200">
+                    New
+                  </span>
+                </div>
+                <div class="p-2.5">
+                  <div class="font-display font-bold text-[13px] text-white group-hover:text-pink-300 transition truncate">
+                    412 Pineview Crescent
+                  </div>
+                  <div class="text-[11px] text-gray-400 flex items-center gap-1 mt-0.5">
+                    <i class="fa-solid fa-location-dot text-zrePink text-[10px]"></i> Iroquois Falls, ON
+                  </div>
+                  <div class="flex items-center gap-2.5 text-[11px] text-gray-300 mt-2 pt-2 border-t border-white/10">
+                    <span><i class="fa-solid fa-bed text-pink-400 mr-1"></i>3 Bd</span>
+                    <span><i class="fa-solid fa-bath text-pink-400 mr-1"></i>2 Ba</span>
+                    <span class="ml-auto text-pink-300 font-semibold">View →</span>
+                  </div>
+                </div>
+              </button>
+
+              <!-- Listing Card 2 -->
+              <button
+                onclick="openPreviewModal('7a. 88 Abitibi Lakefront Rd • $549,900', '4 Beds • 2.5 Baths • Year-round waterfront retreat featuring panoramic lake views, private dock & cedar sauna.', 'zieminski.ca/listings/88-abitibi-lakefront')"
+                class="snap-start shrink-0 w-[235px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink overflow-hidden text-left group transition-all duration-200 cursor-pointer"
+              >
+                <div class="h-24 w-full relative overflow-hidden bg-gradient-to-br from-[#5B183B] via-[#2B1738] to-[#161022]">
+                  <svg class="w-full h-full opacity-85" viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice">
+                    <circle cx="175" cy="30" r="14" fill="#E61E64" opacity="0.35" />
+                    <path d="M0 66 Q60 58 120 66 T240 64 L240 100 L0 100 Z" fill="#130C1D" />
+                    <polygon points="34,22 20,66 48,66" fill="#120B1B" />
+                    <path d="M74 60 L108 38 L142 60 L142 76 L74 76 Z" fill="#F472B6" opacity="0.22" />
+                    <path d="M70 60 L108 35 L146 60" stroke="#FBCFE8" stroke-width="2" fill="none" />
+                  </svg>
+                  <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-zrePink text-white font-display font-bold text-xs shadow">
+                    $549,900
+                  </span>
+                  <span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/55 backdrop-blur-sm text-[10px] font-semibold text-pink-200">
+                    Waterfront
+                  </span>
+                </div>
+                <div class="p-2.5">
+                  <div class="font-display font-bold text-[13px] text-white group-hover:text-pink-300 transition truncate">
+                    88 Abitibi Lakefront Rd
+                  </div>
+                  <div class="text-[11px] text-gray-400 flex items-center gap-1 mt-0.5">
+                    <i class="fa-solid fa-location-dot text-zrePink text-[10px]"></i> Cochrane District, ON
+                  </div>
+                  <div class="flex items-center gap-2.5 text-[11px] text-gray-300 mt-2 pt-2 border-t border-white/10">
+                    <span><i class="fa-solid fa-bed text-pink-400 mr-1"></i>4 Bd</span>
+                    <span><i class="fa-solid fa-bath text-pink-400 mr-1"></i>2.5 Ba</span>
+                    <span class="ml-auto text-pink-300 font-semibold">View →</span>
+                  </div>
+                </div>
+              </button>
+
+              <!-- Listing Card 3 -->
+              <button
+                onclick="openPreviewModal('7a. 19 Birchwood Lane • $295,000', '2 Beds • 1 Bath • Move-in ready bungalow with metal roof, high-efficiency furnace & oversized corner lot.', 'zieminski.ca/listings/19-birchwood-lane')"
+                class="snap-start shrink-0 w-[235px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink overflow-hidden text-left group transition-all duration-200 cursor-pointer"
+              >
+                <div class="h-24 w-full relative overflow-hidden bg-gradient-to-br from-[#2B1D42] via-[#3A193B] to-[#191124]">
+                  <svg class="w-full h-full opacity-85" viewBox="0 0 240 100" preserveAspectRatio="xMidYMid slice">
+                    <polygon points="195,18 180,72 210,72" fill="#120B1B" />
+                    <polygon points="218,30 206,74 230,74" fill="#160E21" />
+                    <path d="M68 65 L104 42 L140 65 L140 84 L68 84 Z" fill="#E61E64" opacity="0.24" />
+                    <path d="M64 65 L104 39 L144 65" stroke="#F472B6" stroke-width="2.5" fill="none" />
+                  </svg>
+                  <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-zrePink text-white font-display font-bold text-xs shadow">
+                    $295,000
+                  </span>
+                </div>
+                <div class="p-2.5">
+                  <div class="font-display font-bold text-[13px] text-white group-hover:text-pink-300 transition truncate">
+                    19 Birchwood Lane
+                  </div>
+                  <div class="text-[11px] text-gray-400 flex items-center gap-1 mt-0.5">
+                    <i class="fa-solid fa-location-dot text-zrePink text-[10px]"></i> Timmins, ON
+                  </div>
+                  <div class="flex items-center gap-2.5 text-[11px] text-gray-300 mt-2 pt-2 border-t border-white/10">
+                    <span><i class="fa-solid fa-bed text-pink-400 mr-1"></i>2 Bd</span>
+                    <span><i class="fa-solid fa-bath text-pink-400 mr-1"></i>1 Ba</span>
+                    <span class="ml-auto text-pink-300 font-semibold">View →</span>
+                  </div>
+                </div>
+              </button>
+
+              <!-- Listing Card 4: View All Listings CTA Card -->
+              <button
+                onclick="openPreviewModal('7a. All Active MLS Listings', 'Opens the complete Zieminski Real Estate Brokerage listings portal to browse all residential, waterfront, and acreage properties.', 'zieminski.ca/listings')"
+                class="snap-start shrink-0 w-[175px] rounded-xl bg-gradient-to-b from-[#2A193A] to-[#1A1126] border border-pink-500/35 hover:border-zrePink p-3.5 flex flex-col items-center justify-center text-center group transition-all duration-200 cursor-pointer"
+              >
+                <div class="w-10 h-10 rounded-full bg-zrePink/20 group-hover:bg-zrePink text-pink-300 group-hover:text-white flex items-center justify-center transition mb-2.5">
+                  <i class="fa-solid fa-arrow-right text-sm"></i>
+                </div>
+                <div class="font-display font-bold text-[13px] text-white leading-snug">
+                  View All Listings
+                </div>
+                <div class="text-[11px] text-gray-300 mt-1">
+                  Explore all Northern Ontario homes
+                </div>
+              </button>
+            </div>
+
+            <!-- Carousel Pagination Dots & Swipe Hint -->
+            <div class="flex items-center justify-between mt-2 pt-1">
+              <div id="carousel-dots" class="flex items-center gap-1.5">
+                <span class="w-4 h-1.5 rounded-full bg-zrePink transition-all duration-200"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+              </div>
+              <span class="text-[10.5px] text-gray-400">Swipe or tap arrows →</span>
+            </div>
+          </div>
+
+          <!-- 7B: "What Is Your Home Trying To Tell You?" Blog Series -->
+          <button
+            id="card-home-series"
+            onclick="openPreviewModal('7b. Educational Blog Series Spotlight', 'Spotlights your signature homeowner education series (e.g., Dryer Vents, seasonal maintenance signs) with a visual badge so it stands out.', 'zieminski.ca/resources/what-is-your-home-trying-to-tell-you')"
+            class="w-full group rounded-2xl bg-gradient-to-r from-[#281A3B] to-[#331938] hover:from-[#322149] hover:to-[#3E1E44] border border-pink-500/40 hover:border-zrePink p-3.5 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-between cursor-pointer"
+          >
+            <div class="flex items-center gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-zrePink/20 flex items-center justify-center text-pink-300 shrink-0">
+                <i class="fa-solid fa-book-open-reader text-base"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-zrePink/25 text-pink-300 border border-zrePink/30">
+                    Blog Series
+                  </span>
+                </div>
+                <div class="font-display font-bold text-[14.5px] text-white leading-snug mt-1">
+                  What Is Your Home Trying To Tell You?
+                </div>
+                <div class="text-xs text-gray-300 mt-0.5">
+                  Explore our homeowner maintenance blog series
+                </div>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-pink-300 group-hover:translate-x-1 transition-transform text-xs"></i>
+          </button>
+
+        </div>
+
+        <!-- 8. TRUSTED PROFESSIONALS LINK -->
+        <button
+          onclick="openPreviewModal('8. Trusted Local Professionals', 'Builds massive value for local homeowners by linking to your vetted directory of inspectors, mortgage brokers, lawyers & contractors.', 'zieminski.ca/resources/trusted-professionals')"
+          class="w-full group rounded-2xl bg-zreCard hover:bg-zreCardHover border border-white/10 hover:border-white/25 p-3.5 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-between cursor-pointer"
+        >
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-pink-400 shrink-0">
+              <i class="fa-solid fa-handshake-angle text-base"></i>
+            </div>
+            <div>
+              <div class="font-display font-bold text-[14.5px] text-white leading-snug">
+                Trusted Local Professionals
+              </div>
+              <div class="text-xs text-gray-300 mt-0.5">
+                Inspectors, lenders &amp; contractors we recommend
+              </div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all text-xs"></i>
+        </button>
+
+        <!-- 9. MEET THE TEAM -->
+        <button
+          onclick="openPreviewModal('9. Meet the Team', 'Humanizes the brokerage and lets prospective clients connect with your agents before reaching out.', 'zieminski.ca/meet-the-team')"
+          class="w-full group rounded-2xl bg-zreCard hover:bg-zreCardHover border border-white/10 hover:border-white/25 p-3.5 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-between cursor-pointer"
+        >
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-pink-400 shrink-0">
+              <i class="fa-solid fa-users text-base"></i>
+            </div>
+            <div>
+              <div class="font-display font-bold text-[14.5px] text-white leading-snug">
+                Meet the Team
+              </div>
+              <div class="text-xs text-gray-300 mt-0.5">
+                Get to know the faces behind ZRE
+              </div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all text-xs"></i>
+        </button>
+
+        <!-- 10. CLIENT REVIEWS / PAST SALES INTERACTIVE CAROUSEL -->
+        <div class="w-full rounded-2xl bg-zreCard border border-white/10 p-3.5 transition-all duration-200">
+          <!-- Carousel Header Bar -->
+          <div class="flex items-center justify-between mb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-amber-400/15 text-amber-400 flex items-center justify-center text-xs">
+                <i class="fa-solid fa-star"></i>
+              </span>
+              <span class="font-display font-bold text-[14px] text-white">Client Reviews &amp; Past Sales</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button
+                onclick="scrollReviewsCarousel(-1)"
+                aria-label="Previous review"
+                class="w-7 h-7 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 flex items-center justify-center text-gray-200 hover:text-white transition cursor-pointer"
+              >
+                <i class="fa-solid fa-chevron-left text-[10px]"></i>
+              </button>
+              <button
+                onclick="scrollReviewsCarousel(1)"
+                aria-label="Next review"
+                class="w-7 h-7 rounded-full bg-white/5 hover:bg-zrePink border border-white/10 flex items-center justify-center text-gray-200 hover:text-white transition cursor-pointer"
+              >
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Horizontal Swipeable Reviews Track -->
+          <div
+            id="reviews-carousel"
+            onscroll="updateReviewsDots()"
+            class="flex gap-2.5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-1"
+          >
+            <!-- Review Card 1 -->
+            <button
+              onclick="openPreviewModal('10. 5-Star Seller Review • Iroquois Falls', '“Zieminski Real Estate made selling our family home seamless from start to finish. Clear communication, honest pricing advice, and sold in under two weeks!” — Sarah & Mark T.', 'zieminski.ca/reviews')"
+              class="snap-start shrink-0 w-[245px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink p-3 text-left flex flex-col justify-between group transition-all duration-200 cursor-pointer"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-0.5 text-amber-400 text-[11px]">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-zrePink/20 text-pink-300 border border-zrePink/30 text-[10px] font-bold">
+                    Sold
+                  </span>
+                </div>
+                <p class="text-xs text-gray-200 leading-relaxed line-clamp-3">
+                  “Made selling our family home seamless from start to finish. Honest pricing advice and sold in under two weeks!”
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="font-display font-bold text-xs text-white group-hover:text-pink-300 transition">
+                    Sarah &amp; Mark T.
+                  </div>
+                  <div class="text-[10.5px] text-gray-400">Iroquois Falls, ON</div>
+                </div>
+                <i class="fa-solid fa-quote-right text-pink-500/40 text-sm"></i>
+              </div>
+            </button>
+
+            <!-- Review Card 2 -->
+            <button
+              onclick="openPreviewModal('10. 5-Star Buyer Review • Cochrane', '“As first-time buyers in Northern Ontario, we had endless questions. The ZRE team spotted things during walkthroughs we never would have noticed.” — Devon L.', 'zieminski.ca/reviews')"
+              class="snap-start shrink-0 w-[245px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink p-3 text-left flex flex-col justify-between group transition-all duration-200 cursor-pointer"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-0.5 text-amber-400 text-[11px]">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-pink-500/15 text-pink-200 border border-white/15 text-[10px] font-bold">
+                    Buyer
+                  </span>
+                </div>
+                <p class="text-xs text-gray-200 leading-relaxed line-clamp-3">
+                  “As first-time buyers, we had endless questions. They spotted details during walkthroughs we never would have noticed!”
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="font-display font-bold text-xs text-white group-hover:text-pink-300 transition">
+                    Devon &amp; Kayla L.
+                  </div>
+                  <div class="text-[10.5px] text-gray-400">Cochrane, ON</div>
+                </div>
+                <i class="fa-solid fa-quote-right text-pink-500/40 text-sm"></i>
+              </div>
+            </button>
+
+            <!-- Review Card 3 -->
+            <button
+              onclick="openPreviewModal('10. 5-Star Waterfront Sale • Matheson', '“Local knowledge makes all the difference up here. They marketed our lakefront property thoughtfully and brought qualified buyers right away.” — Robert G.', 'zieminski.ca/reviews')"
+              class="snap-start shrink-0 w-[245px] rounded-xl bg-[#181024] border border-white/10 hover:border-zrePink p-3 text-left flex flex-col justify-between group transition-all duration-200 cursor-pointer"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-0.5 text-amber-400 text-[11px]">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <span class="px-2 py-0.5 rounded-full bg-zrePink/20 text-pink-300 border border-zrePink/30 text-[10px] font-bold">
+                    Sold
+                  </span>
+                </div>
+                <p class="text-xs text-gray-200 leading-relaxed line-clamp-3">
+                  “Local knowledge makes all the difference up here. They marketed our lakefront property thoughtfully and brought great buyers.”
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between">
+                <div>
+                  <div class="font-display font-bold text-xs text-white group-hover:text-pink-300 transition">
+                    Robert G.
+                  </div>
+                  <div class="text-[10.5px] text-gray-400">Matheson, ON</div>
+                </div>
+                <i class="fa-solid fa-quote-right text-pink-500/40 text-sm"></i>
+              </div>
+            </button>
+
+            <!-- Review Card 4: Read All Reviews & Past Sales CTA -->
+            <button
+              onclick="openPreviewModal('10. All Client Reviews & Past Sales', 'Opens the full testimonials and recently sold portfolio page on zieminski.ca.', 'zieminski.ca/reviews')"
+              class="snap-start shrink-0 w-[180px] rounded-xl bg-gradient-to-b from-[#2A193A] to-[#1A1126] border border-pink-500/35 hover:border-zrePink p-3.5 flex flex-col items-center justify-center text-center group transition-all duration-200 cursor-pointer"
+            >
+              <div class="w-10 h-10 rounded-full bg-amber-400/15 group-hover:bg-zrePink text-amber-400 group-hover:text-white flex items-center justify-center transition mb-2.5">
+                <i class="fa-solid fa-arrow-right text-sm"></i>
+              </div>
+              <div class="font-display font-bold text-[13px] text-white leading-snug">
+                Read All Reviews &amp; Past Sales
+              </div>
+              <div class="text-[11px] text-gray-300 mt-1">
+                See more local stories
+              </div>
+            </button>
+          </div>
+
+          <!-- Carousel Pagination Dots & Swipe Hint -->
+          <div class="flex items-center justify-between mt-2 pt-1">
+            <div id="reviews-dots" class="flex items-center gap-1.5">
+              <span class="w-4 h-1.5 rounded-full bg-zrePink transition-all duration-200"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200"></span>
+            </div>
+            <span class="text-[10.5px] text-gray-400">Swipe or tap arrows →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 11. CLOSING FOOTER -->
+      <footer class="mt-8 pt-6 border-t border-white/10 w-full flex flex-col items-center text-center">
+        <p class="text-xs text-gray-300 font-medium leading-relaxed">
+          Zieminski Real Estate Brokerage •
+          <button
+            onclick="openPreviewModal('11. Main Brokerage Website', 'Direct link to the full Zieminski Real Estate Brokerage website.', 'zieminski.ca')"
+            class="font-semibold text-pink-400 hover:text-pink-300 transition cursor-pointer underline decoration-pink-500/40"
+          >zieminski.ca</button>
+          • Serving Northern Ontario
+        </p>
+
+        <!-- Minimalist Brand Mark -->
+        <div class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-400">
+          <span class="w-2 h-2 rounded-full bg-zrePink"></span>
+          <span>Ready when you are — no rush, just real advice.</span>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Interactive Destination Preview Modal (Replaces alert) -->
+  <div id="preview-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="bg-[#211630] border border-white/15 rounded-2xl max-w-sm w-full p-5 shadow-2xl transform transition-all">
+      <div class="flex items-start justify-between gap-3">
+        <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zrePink">
+          <i class="fa-solid fa-link"></i> Link Destination Preview
+        </span>
+        <button onclick="closePreviewModal()" class="text-gray-400 hover:text-white transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+      <h3 id="modal-title" class="font-display font-bold text-lg text-white mt-2"></h3>
+      <p id="modal-desc" class="text-sm text-gray-300 mt-1.5 leading-relaxed"></p>
+      
+      <div class="mt-4 p-2.5 rounded-xl bg-[#140D1E] border border-white/10 flex items-center justify-between gap-2">
+        <code id="modal-url" class="text-xs text-pink-300 truncate"></code>
+        <span class="text-[10px] uppercase tracking-wider text-gray-400 shrink-0">Target URL</span>
+      </div>
+
+      <button
+        onclick="closePreviewModal()"
+        class="mt-5 w-full py-2.5 rounded-xl bg-zrePink hover:bg-zrePinkHover text-white font-semibold text-sm transition cursor-pointer"
+      >
+        Got It
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Share/Copy -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2 px-4 py-2.5 rounded-full bg-zrePink text-white text-xs font-semibold shadow-lg">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Bio link copied to clipboard!</span>
+  </div>
+
+  <script>
+    /**
+     * Toggles the order of Step #7 between Featured Listings First and Blog Series First
+     */
+    function setSection7Order(mode) {
+      const container = document.getElementById('section-7-container');
+      const listingsCard = document.getElementById('card-featured-listings');
+      const seriesCard = document.getElementById('card-home-series');
+      const btnListings = document.getElementById('btn-order-listings');
+      const btnSeries = document.getElementById('btn-order-series');
+
+      if (!container || !listingsCard || !seriesCard) return;
+
+      if (mode === 'series-first') {
+        container.appendChild(seriesCard);
+        container.appendChild(listingsCard);
+        btnSeries.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 bg-zrePink text-white shadow-sm cursor-pointer';
+        btnListings.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 text-gray-300 hover:text-white cursor-pointer';
+      } else {
+        container.appendChild(listingsCard);
+        container.appendChild(seriesCard);
+        btnListings.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 bg-zrePink text-white shadow-sm cursor-pointer';
+        btnSeries.className = 'py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-200 text-gray-300 hover:text-white cursor-pointer';
+      }
+    }
+
+    /**
+     * Scrolls the Featured Listings horizontal carousel left or right by one card width
+     */
+    function scrollListingsCarousel(direction) {
+      const carousel = document.getElementById('listings-carousel');
+      if (!carousel) return;
+      const scrollAmount = 245 * direction;
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    /**
+     * Updates the active pagination indicator pill for Featured Listings
+     */
+    function updateCarouselDots() {
+      const carousel = document.getElementById('listings-carousel');
+      const dotsContainer = document.getElementById('carousel-dots');
+      if (!carousel || !dotsContainer) return;
+
+      const dots = dotsContainer.children;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const progress = carousel.scrollLeft / maxScroll;
+      const activeIndex = Math.min(
+        dots.length - 1,
+        Math.round(progress * (dots.length - 1))
+      );
+
+      for (let i = 0; i < dots.length; i++) {
+        if (i === activeIndex) {
+          dots[i].className = 'w-4 h-1.5 rounded-full bg-zrePink transition-all duration-200';
+        } else {
+          dots[i].className = 'w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200';
+        }
+      }
+    }
+
+    /**
+     * Scrolls the Client Reviews & Past Sales horizontal carousel left or right
+     */
+    function scrollReviewsCarousel(direction) {
+      const carousel = document.getElementById('reviews-carousel');
+      if (!carousel) return;
+      const scrollAmount = 255 * direction;
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    /**
+     * Updates the active pagination indicator pill for Client Reviews & Past Sales
+     */
+    function updateReviewsDots() {
+      const carousel = document.getElementById('reviews-carousel');
+      const dotsContainer = document.getElementById('reviews-dots');
+      if (!carousel || !dotsContainer) return;
+
+      const dots = dotsContainer.children;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (maxScroll <= 0) return;
+
+      const progress = carousel.scrollLeft / maxScroll;
+      const activeIndex = Math.min(
+        dots.length - 1,
+        Math.round(progress * (dots.length - 1))
+      );
+
+      for (let i = 0; i < dots.length; i++) {
+        if (i === activeIndex) {
+          dots[i].className = 'w-4 h-1.5 rounded-full bg-zrePink transition-all duration-200';
+        } else {
+          dots[i].className = 'w-1.5 h-1.5 rounded-full bg-white/25 transition-all duration-200';
+        }
+      }
+    }
+
+    /**
+     * Opens the strategy & destination preview modal when any button is clicked
+     */
+    function openPreviewModal(title, description, url) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = description;
+      document.getElementById('modal-url').textContent = url;
+      const modal = document.getElementById('preview-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('preview-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    /**
+     * Copies a mock bio link URL using execCommand fallback for iframe compatibility
+     */
+    function copyProfileLink() {
+      const tempInput = document.createElement('input');
+      tempInput.value = 'https://linktr.ee/zieminskirealestate';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const toast = document.getElementById('toast');
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 2400);
+    }
+
+    // Close modal when clicking backdrop
+    document.getElementById('preview-modal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closePreviewModal();
+      }
+    });
+  </script>
+</body>
+</html>
